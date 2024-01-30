@@ -19,24 +19,20 @@ jobs:
       - name: Checkout PR branch
         uses: actions/checkout@v3
 
-      - name: Setup Kang
-        uses: zeet-co/kang@main
-
       - name: Create Environment
+        uses: zeet-co/kang@gha
         if: github.event.action == 'opened'
-        run: |
-          kang start --name=${{ github.ref }} --ids=1c6ea878-f92e-435e-a849-7bccfe7c6e5a,c8c3a2a0-2349-41a3-871f-e81cac18f305 
+        with:
+          args: start --name=${{ github.ref }} --ids=1c6ea878-f92e-435e-a849-7bccfe7c6e5a,c8c3a2a0-2349-41a3-871f-e81cac18f305
         env:
           TOKEN: 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
 
       - name: Run Destroy Action
+        uses: zeet-co/kang@gha
         if: github.event.action == 'closed'
-        run: |
-          kang stop --name=${{ github.ref }}
+        args: stop --name=${{ github.ref }}
 
       - name: Post Kang comment
-        run: |
-            kang comment github --repo=$GITHUB_REPOSITORY \
-                                --token=${{ github.token }} \
-                                --pr=${{ github.event.pull_request.number }} \ 
-                                --env-name=${{ github.ref }}
+        uses: zeet-co/kang@gha
+        with:
+          args: comment --repo=$GITHUB_REPOSITORY --token=${{ github.token }} --pr=${{ github.event.pull_request.number }} --env-name=${{ github.ref }}
