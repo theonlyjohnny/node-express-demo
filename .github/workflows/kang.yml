@@ -1,0 +1,39 @@
+on:
+  pull_request:
+    types: [opened, closed]
+jobs:
+  kang:
+    name: Kang
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Required to post comments
+      pull-requests: write
+
+    env:
+      TF_ROOT: examples/terraform-project/code
+      ZEET_API_KEY: ${{ secrets.ZEET_API_KEY }}
+      ZEET_TEAM_ID: 2cb4ab13-c642-4f58-938f-0ca28a6f0189
+    steps:
+      # Checkout the current PR branch.
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+
+      - name: Create Environment
+        uses: zeet-co/kang@gha
+        if: github.event.action == 'opened'
+        with:
+          args: start --name=${{ github.head_ref }} --ids=1c6ea878-f92e-435e-a849-7bccfe7c6e5a,c8c3a2a0-2349-41a3-871f-e81cac18f305
+        env:
+          TOKEN: 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
+
+      - name: Run Destroy Action
+        uses: zeet-co/kang@gha
+        if: github.event.action == 'closed'
+        with:
+          args: stop --name=${{ github.head_ref }}
+
+      - name: Post Kang comment
+        uses: zeet-co/kang@gha
+        with:
+          args: comment --repo=${{ github.repository }} --token=${{ github.token }} --pr=${{ github.event.pull_request.number }} --env-name=${{ github.head_ref }}
