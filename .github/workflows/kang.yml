@@ -30,7 +30,8 @@ jobs:
       - name: Run Destroy Action
         uses: zeet-co/kang@gha
         if: github.event.action == 'closed'
-        args: stop --name=${{ github.ref }}
+        with:
+          args: stop --name=${{ github.ref }}
 
       - name: Post Kang comment
         uses: zeet-co/kang@gha
