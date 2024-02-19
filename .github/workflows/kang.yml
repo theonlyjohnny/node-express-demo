@@ -11,7 +11,6 @@ jobs:
       pull-requests: write
 
     env:
-      TF_ROOT: examples/terraform-project/code
       ZEET_API_KEY: ${{ secrets.ZEET_API_KEY }}
       ZEET_TEAM_ID: 2cb4ab13-c642-4f58-938f-0ca28a6f0189
     steps:
@@ -19,21 +18,22 @@ jobs:
       - name: Checkout PR branch
         uses: actions/checkout@v3
 
+      - name: Set Modified Branch Name
+        run: echo "MODIFIED_HEAD_REF=$(echo ${{ github.head_ref }} | sed 's/\//_/g')" >> $GITHUB_ENV
+
       - name: Create Environment
         uses: zeet-co/kang@gha
         if: github.event.action == 'opened'
         with:
-          args: start --name=${{ github.head_ref }} --ids=1c6ea878-f92e-435e-a849-7bccfe7c6e5a,c8c3a2a0-2349-41a3-871f-e81cac18f305
-        env:
-          TOKEN: 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
+          args: start --name=${{ env.MODIFIED_HEAD_REF }} --ids=1c6ea878-f92e-435e-a849-7bccfe7c6e5a,c8c3a2a0-2349-41a3-871f-e81cac18f305
 
       - name: Run Destroy Action
         uses: zeet-co/kang@gha
         if: github.event.action == 'closed'
         with:
-          args: stop --name=${{ github.head_ref }}
+          args: stop --name=${{ env.MODIFIED_HEAD_REF }}
 
       - name: Post Kang comment
         uses: zeet-co/kang@gha
         with:
-          args: comment --repo=${{ github.repository }} --token=${{ github.token }} --pr=${{ github.event.pull_request.number }} --env-name=${{ github.head_ref }}
+          args: comment --repo=${{ github.repository }} --token=${{ github.token }} --pr=${{ github.event.pull_request.number }} --env-name=${{ env.MODIFIED_HEAD_REF }}
