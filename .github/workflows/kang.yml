@@ -23,9 +23,7 @@ jobs:
         uses: zeet-co/kang@v0
         if: github.event.action == 'opened'
         with:
-          args: start --name=${{ github.head_ref }} --ids=1c6ea878-f92e-435e-a849-7bccfe7c6e5a,c8c3a2a0-2349-41a3-871f-e81cac18f305
-        env:
-          TOKEN: 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
+          args: start --name=${{ github.head_ref }} --ids=1c6ea878-f92e-435e-a849-7bccfe7c6e5a,c8c3a2a0-2349-41a3-871f-e81cac18f305 --overrides '1c6ea878-f92e-435e-a849-7bccfe7c6e5a:cpu:1,1c6ea878-f92e-435e-a849-7bccfe7c6e5a:memory:1G'
 
       - name: Run Destroy Action
         uses: zeet-co/kang@v0
