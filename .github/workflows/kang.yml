@@ -23,7 +23,7 @@ jobs:
         uses: zeet-co/kang@v0.1
         if: github.event.action == 'opened'
         with:
-          args: start --name=${{ github.head_ref }} --ids=1c6ea878-f92e-435e-a849-7bccfe7c6e5a,c8c3a2a0-2349-41a3-871f-e81cac18f305 --overrides '1c6ea878-f92e-435e-a849-7bccfe7c6e5a:env.NEXT_PUBLIC_PYTHON_API_URL:c8c3a2a0-2349-41a3-871f-e81cac18f305:deployment.endpoints[0],1c6ea878-f92e-435e-a849-7bccfe7c6e5a:cpu:1,1c6ea878-f92e-435e-a849-7bccfe7c6e5a:memory:1G,1c6ea878-f92e-435e-a849-7bccfe7c6e5a:cluster:4461ab27-26bc-4196-aa03-bbf6d4fa9908,c8c3a2a0-2349-41a3-871f-e81cac18f305:cluster:4461ab27-26bc-4196-aa03-bbf6d4fa9908'
+          args: start --name=${{ github.head_ref }} --ids=1c6ea878-f92e-435e-a849-7bccfe7c6e5a,c8c3a2a0-2349-41a3-871f-e81cac18f305 --overrides '1c6ea878-f92e-435e-a849-7bccfe7c6e5a:env.NEXT_PUBLIC_PYTHON_API_URL:c8c3a2a0-2349-41a3-871f-e81cac18f305:deployment.endpoints[0],1c6ea878-f92e-435e-a849-7bccfe7c6e5a:cpu:1,1c6ea878-f92e-435e-a849-7bccfe7c6e5a:cluster:4461ab27-26bc-4196-aa03-bbf6d4fa9908,c8c3a2a0-2349-41a3-871f-e81cac18f305:cluster:4461ab27-26bc-4196-aa03-bbf6d4fa9908,1c6ea878-f92e-435e-a849-7bccfe7c6e5a:memory:1G'
       - name: Run Destroy Action
         uses: zeet-co/kang@v0.1
         if: github.event.action == 'closed'
