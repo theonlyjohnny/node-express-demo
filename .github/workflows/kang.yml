@@ -25,10 +25,10 @@ jobs:
         with:
           args: >
             start --name=${{ github.head_ref }} --ids=bcf2e9c5-8172-4d7a-95d6-d4fa457b5521,95627c46-1ae9-41d8-bb48-27b89b0ef09d
-            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:env.NEXT_PUBLIC_PYTHON_API_URL:95627c46-1ae9-41d8-bb48-27b89b0ef09d:deployment.endpoints[0]'
-            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:cpu:10'
-            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:env.foobar:example'
-            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:memory:1G'
+            --overrides bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:env.NEXT_PUBLIC_PYTHON_API_URL:95627c46-1ae9-41d8-bb48-27b89b0ef09d:deployment.endpoints[0]
+            --overrides bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:cpu:10
+            --overrides bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:env.foobar:example
+            --overrides bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:memory:1G
       - name: Run Destroy Action
         uses: zeet-co/kang@v0.3
         if: github.event.action == 'closed'
