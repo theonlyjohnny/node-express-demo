@@ -24,11 +24,11 @@ jobs:
         if: github.event.action == 'opened'
         with:
           args: | 
-            start --name=${{ github.head_ref }} --ids=bcf2e9c5-8172-4d7a-95d6-d4fa457b5521,95627c46-1ae9-41d8-bb48-27b89b0ef09d 
-            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:env.NEXT_PUBLIC_PYTHON_API_URL:95627c46-1ae9-41d8-bb48-27b89b0ef09d:deployment.endpoints[0]'
-            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:cpu:1'
-            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:cluster:4461ab27-26bc-4196-aa03-bbf6d4fa9908'
-            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:memory:1G'
+            start --name=${{ github.head_ref }} --ids=bcf2e9c5-8172-4d7a-95d6-d4fa457b5521,95627c46-1ae9-41d8-bb48-27b89b0ef09d \
+            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:env.NEXT_PUBLIC_PYTHON_API_URL:95627c46-1ae9-41d8-bb48-27b89b0ef09d:deployment.endpoints[0]' \
+            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:cpu:1' \
+            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:cluster:4461ab27-26bc-4196-aa03-bbf6d4fa9908' \
+            --overrides 'bcf2e9c5-8172-4d7a-95d6-d4fa457b5521:memory:1G' \
             --overrides '95627c46-1ae9-41d8-bb48-27b89b0ef09d:cluster:4461ab27-26bc-4196-aa03-bbf6d4fa9908'
       - name: Run Destroy Action
         uses: zeet-co/kang@v0.1
